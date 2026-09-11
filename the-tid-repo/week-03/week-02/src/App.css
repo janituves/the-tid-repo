@@ -1,0 +1,16 @@
+body { background-color: darkblue} 
+button{
+    border-radius: 5;
+}
+.annas-todo{
+    background-color: rgb(214, 242, 252);
+}
+.konsts-todo{
+    background-color: rgb(173, 235, 194);
+}
+#addButton{
+    color:darkblue;
+    background-color: pink;
+    
+}
+
