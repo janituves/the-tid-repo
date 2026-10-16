@@ -1,25 +1,28 @@
 
 import './App.css'
 import BookItem from './components/BookItem'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NewBookForm from './components/NewBookForm';
 import Parse from 'parse';
+import { fetchBooks, createBook, setBookRead, deleteBook } from './services/bookService';
 
 Parse.initialize("ajlHyoO5UM9xxYXGo996wmrDzRlv3ru33K9zjMvf", "WJ60UTcTolxFOB2J0lbMLk2YwpKkXSYjggNE0wxI");
 Parse.serverURL = "https://parseapi.back4app.com";
 
-const firstBooks = [{id: 1, title: "The Bible", read: false},
-   {id: 2, title: "The Hobbit", read: false},
-   {id: 3, title: "Shining", read: false}]
-
-
-
-
 
 function App() {
- const [books, setBooks] = useState(firstBooks);
+ const [books, setBooks] = useState([]);
 
- function handleAdd(text){
+ useEffect(() =>{
+  async function load() {
+    setBooks(await fetchBooks());
+    
+  }
+  load();
+ }, []);
+
+ async function handleAdd(text){
+  const created = await createBook(text)
   setBooks([...books,{id: crypto.randomUUID(), title: text, read: false}])
  }
 
